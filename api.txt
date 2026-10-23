@@ -1,0 +1,34 @@
+# Public API of github.com/laenenai/redactlint, as a golden file.
+#
+# Regenerate with: go test . -run TestAPIGolden -update-api
+#
+# "package redactlint" is the analyzer a consumer constructs; "package main"
+# is the standalone binary that runs it. There are no internal packages and
+# no aliased types: the surface is NewAnalyzer, the opt-out marker's literal,
+# and the default pattern list. Growing this file is a reviewed diff — see
+# CHARTER.md.
+#
+# Test-only exports belong in export_test.go, which is why ParsePatternsForTest
+# is not here.
+
+package redactlint // .
+
+var DefaultPatterns = []string{
+	"key",
+	"secret",
+	"token",
+	"password",
+	"passwd",
+	"credential",
+	"dsn",
+	"material",
+	"share",
+	"privatekey",
+	"seed",
+}
+
+func NewAnalyzer() *analysis.Analyzer
+
+const OptOutMarker = "redact:plain"
+
+package main // cmd/redactlint
